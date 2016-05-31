@@ -1,0 +1,42 @@
+{
+  "name": "meshblu-wemo",
+  "repository": "octoblu/meshblu-wemo",
+  "version": "1.5.4",
+  "main": "connector.js",
+  "scripts": {
+    "preinstall": "node -e \"try{require('./skip-install.js')}catch(e){}\"",
+    "start": "node command.js",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "lodash": "^3.10.1",
+    "meshblu": "^1.30.1",
+    "meshblu-config": "^3.1.1",
+    "wemo": "^0.2.1"
+  },
+  "platformDependencies": {
+    "darwin": [],
+    "win32": [],
+    "win64": [],
+    "linux": [],
+    "android": null,
+    "ios": null
+  },
+  "bundledDependencies": [
+    "request",
+    "tar",
+    "fstream"
+  ],
+  "keywords": [
+    "meshblu-connector",
+    "gateblu",
+    "wemo"
+  ],
+  "author": "Octoblu, Inc. <sqrt@octoblu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octoblu/meshblu-wemo/issues"
+  },
+  "homepage": "https://github.com/octoblu/meshblu-wemo"
+}
