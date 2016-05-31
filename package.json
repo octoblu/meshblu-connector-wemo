@@ -1,7 +1,7 @@
 {
   "name": "meshblu-connector-wemo",
   "repository": "octoblu/meshblu-wemo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "connector.js",
   "scripts": {
     "start": "meshblu-connector-runner",
