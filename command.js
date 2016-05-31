@@ -1,24 +1,12 @@
+#!/usr/bin/env node
 'use strict';
-var Connector     = require('./connector');
-var _             = require('lodash');
-var MeshbluConfig = require('meshblu-config');
-var meshbluConfig = new MeshbluConfig({});
+require('coffee-script/register');
 
-var connector = new Connector(meshbluConfig.toJSON());
+var ConnectorRunner = require('meshblu-connector-runner');
+var MeshbluConfig   = require('meshblu-config');
 
-connector.on('error', function(error) {
-  if(!error){
-    console.error('an unknown error occured');
-    return;
-  }
-  if(_.isPlainObject(error)){
-    console.error(error);
-    return;
-  }
-  console.error(error.toString());
-  if(error.stack){
-    console.error(error.stack);
-  }
+var connectorRunner = new ConnectorRunner({
+  connectorPath: __dirname,
+  meshbluConfig: new MeshbluConfig().toJSON()
 });
-
-connector.run();
+connectorRunner.run()

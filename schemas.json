@@ -1,0 +1,67 @@
+{
+  "schemas": {
+    "version": "1.0.0",
+    "configure": {
+      "default": {
+        "title": "Default Config",
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "object",
+            "properties": {
+              "autoDiscover": {
+                "title": "Auto Discover Wemo Switch",
+                "type": "boolean"
+              },
+              "wemoName": {
+                "title": "Wemo Name",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": ["options"]
+      }
+    },
+    "message": {
+      "toggle-switch": {
+        "title": "Toggle Switch",
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "jobType": {
+                "type": "string",
+                "default": "toggleSwitch"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "on": {
+                "type": "boolean",
+                "default": true
+              },
+              "required": ["on"]
+            }
+          }
+        },
+        "x-form-schema": {
+          "angular": "message.toggle-switch.angular"
+        },
+        "required": ["data", "metadata"]
+      }
+    },
+    "form": {
+      "message": {
+        "toggle-switch": {
+          "angular": [
+            { "key": "data.on" }
+          ]
+        }
+      }
+    }
+  }
+}
