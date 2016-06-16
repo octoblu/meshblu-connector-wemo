@@ -49,8 +49,13 @@ class WemoManager extends EventEmitter
   _changeState: ({state}, callback) =>
     callback = _.once callback
     return callback new Error 'No current WeMo connection' unless @client?
-    @client.once 'binaryState', => callback()
-    @client.once 'error', callback
+    timeout = setTimeout =>
+      callback new Error 'Timed out waiting for state to change'
+    , 5000
+    @client.once 'binaryState', =>
+      clearTimeout timeout
+      callback()
+
     @client.setBinaryState state
 
 module.exports = WemoManager

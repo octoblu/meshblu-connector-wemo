@@ -1,7 +1,7 @@
 {
   "name": "meshblu-connector-wemo",
   "repository": "octoblu/meshblu-wemo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "connector.js",
   "scripts": {
     "start": "meshblu-connector-runner",
@@ -45,12 +45,13 @@
   "homepage": "https://github.com/octoblu/meshblu-wemo",
   "meshbluConnector": {
     "githubSlug": "octoblu/meshblu-connector-wemo",
-    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-wemo/v2.0.0/schemas.json"
+    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-wemo/v2.0.1/schemas.json"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "uuid": "^2.0.2"
   }
 }
