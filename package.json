@@ -6,7 +6,8 @@
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
-    "package": "meshblu-connector-packager"
+    "generate:package": "meshblu-connector-packager",
+    "generate:schema": "meshblu-connector-schema-generator > schemas.json"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -14,16 +15,17 @@
     "lodash": "^4.13.1",
     "meshblu": "^1.30.1",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^6.0.0",
-    "wemo-client": "^0.7.0"
+    "meshblu-connector-runner": "^7.0.0",
+    "wemo-client": "^0.7.0",
+    "fs-cson": "^0.3.2"
   },
   "platformDependencies": {
     "darwin": [],
     "win32": [],
     "win64": [],
     "linux": [],
-    "android": [],
-    "ios": []
+    "android": null,
+    "ios": null
   },
   "bundledDependencies": [
     "request",
@@ -43,7 +45,7 @@
   "homepage": "https://github.com/octoblu/meshblu-wemo",
   "meshbluConnector": {
     "githubSlug": "octoblu/meshblu-connector-wemo",
-    "schemasUrl": "https://raw.githubusercontent.com/octoblu/meshblu-connector-wemo/v1.0.0/schemas.json"
+    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-wemo/v2.0.0/schemas.json"
   },
   "devDependencies": {
     "chai": "^3.5.0",

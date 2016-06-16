@@ -1,69 +1,36 @@
-{EventEmitter}  = require 'events'
 _               = require 'lodash'
-WemoClient      = require 'wemo-client'
+{EventEmitter}  = require 'events'
 debug           = require('debug')('meshblu-connector-wemo:index')
+WemoManager     = require './wemo-manager'
 
-class Wemo extends EventEmitter
+class Connector extends EventEmitter
   constructor: ->
-    @wemo = new WemoClient
+    @wemo = new WemoManager
 
   isOnline: (callback) =>
-    callback null, running: !!@client
+    @wemo.isOnline (error, {running}) =>
+      return callback error if error?
+      callback null, {running}
 
   close: (callback) =>
     debug 'on close'
     callback()
 
-  onMessage: (message={}) =>
-    unless @client?
-      return @emit 'message', devices: ['*'], topic: 'status', payload: status: 'not-ready'
-
-    return unless message.payload?
-    { metadata, data } = message.payload
-    return unless metadata?
-    return unless data?
-    { jobType } = metadata
-    return unless jobType?
-    return debug 'invalid jobType' unless jobType == 'toggleSwitch'
-    debug 'running jobType', jobType, data.on
-    onState = 0 unless data.on
-    onState = 1 if data.on
-    @client.setBinaryState onState
-
   onConfig: (device={}) =>
-    debug 'on config'
-    { wemoName, autoDiscover } = device.options ? {}
-    @client = null if wemoName != @wemoName
-    @client = null if autoDiscover != @autoDiscover
-    @wemoName = wemoName
-    @autoDiscover = autoDiscover
-    @discover() unless @discovering
+    { @options } = device
+    debug 'on config', @options
+    { @wemoName, @autoDiscover } = @options ? {}
+    @wemo.discover {@wemoName, @autoDiscover}
 
-  onDiscover: (device) =>
-    return debug 'missing device' unless device?
-    { deviceType } = device
-    if deviceType != WemoClient.DEVICE_TYPE.Switch
-      return debug 'invalid device type'
-    if !@autoDiscover && device.friendlyName != @wemoName
-      return debug('name doesn\'t match', device.friendlyName, @wemoName)
-    @discovering = false
-    debug 'discovered', device.friendlyName
-    @client = @wemo.client device
-    @client.on 'binaryState', (value) =>
-      debug 'got binaryState', value
-      online = true if value == '1'
-      online = false unless value == '1'
-      @emit 'message', devices: ['*'], topic: 'status', payload: { status: 'state-change', online }
-
-  discover: =>
-    @discovering = true
-    return if @client?
-    _.delay @discover, 10000
-    debug 'discovering...'
-    @wemo.discover @onDiscover
-
-  start: (device) =>
+  start: (device, callback) =>
+    debug 'started'
     @onConfig device
-    @discover() unless @discovering
+    @wemo.once 'connected', callback
 
-module.exports = Wemo
+  turnOff: (callback) =>
+    @wemo.turnOff callback
+
+  turnOn: (callback) =>
+    @wemo.turnOn callback
+
+module.exports = Connector

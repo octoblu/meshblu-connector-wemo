@@ -1,0 +1,12 @@
+title: 'ToggleSwitch'
+type: 'object'
+properties:
+  data:
+    type: 'object'
+    properties:
+      on:
+        type: 'boolean'
+        default: true
+    required: [
+      'on'
+    ]
