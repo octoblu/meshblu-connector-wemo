@@ -1,0 +1,11 @@
+title: 'GetSwitchState'
+type: 'object'
+properties:
+  data:
+    type: 'object'
+    properties:
+      binaryState:
+        type: 'integer'
+    required: [
+      'binaryState'
+    ]

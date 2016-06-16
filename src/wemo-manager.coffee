@@ -6,14 +6,21 @@ debug           = require('debug')('meshblu-connector-wemo:wemo-manager')
 class WemoManager extends EventEmitter
   constructor: ->
     @wemo = new WemoClient
+    @client = null
 
   discover: ({wemoName, autoDiscover}) =>
-    return if wemoName == @wemoName && autoDiscover == @autoDiscover
+    return if wemoName == @wemoName && autoDiscover == @autoDiscover && @client?
     { @wemoName, @autoDiscover } = { wemoName, autoDiscover }
     @client = null
     @discovering = true
     debug 'discovering...'
     @wemo.discover @_onDiscover
+
+  getBinaryState: (callback) =>
+    return callback new Error 'No current WeMo connection' unless @client?
+    @client.getBinaryState (error, state) =>
+      return callback error if error?
+      callback null, parseInt(state)
 
   isOnline: (callback) =>
     return callback null, running: !!@client
@@ -40,8 +47,10 @@ class WemoManager extends EventEmitter
     @_changeState state: 0, callback
 
   _changeState: ({state}, callback) =>
-    return callback new Error 'No current WeMo connection' unless @client
+    callback = _.once callback
+    return callback new Error 'No current WeMo connection' unless @client?
     @client.once 'binaryState', => callback()
+    @client.once 'error', callback
     @client.setBinaryState state
 
 module.exports = WemoManager

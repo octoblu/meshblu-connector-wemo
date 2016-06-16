@@ -1,8 +1,8 @@
 http = require 'http'
 
-class SampleJob
+class ToggleSwitch
   constructor: ({@connector}) ->
-    throw new Error 'SampleJob requires connector' unless @connector?
+    throw new Error 'ToggleSwitch requires connector' unless @connector?
 
   do: ({data}, callback) =>
     return callback @_userError(422, 'data.on is required') unless data?.on?
@@ -16,4 +16,4 @@ class SampleJob
     error.code = code
     return error
 
-module.exports = SampleJob
+module.exports = ToggleSwitch

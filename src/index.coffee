@@ -22,6 +22,9 @@ class Connector extends EventEmitter
     { @wemoName, @autoDiscover } = @options ? {}
     @wemo.discover {@wemoName, @autoDiscover}
 
+  getBinaryState: (callback) =>
+    @wemo.getBinaryState callback
+
   start: (device, callback) =>
     debug 'started'
     @onConfig device
