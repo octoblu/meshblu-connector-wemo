@@ -1,0 +1,4 @@
+angular: [
+  { key: 'options.autoDiscover'}
+  { key: 'options.wemoName'}
+]

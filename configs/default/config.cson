@@ -8,9 +8,13 @@ properties:
       autoDiscover:
         title: "Auto Discover Wemo Switch"
         type: "boolean"
+        default: false
       wemoName:
         title: "Wemo Name"
         type: "string"
+    required: [
+      "autoDiscover"
+    ]
 required: [
   "options"
 ]

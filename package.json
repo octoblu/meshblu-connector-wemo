@@ -1,8 +1,7 @@
 {
   "name": "meshblu-connector-wemo",
-  "repository": "octoblu/meshblu-wemo",
-  "version": "2.0.1",
-  "main": "connector.js",
+  "version": "2.0.2",
+  "main": "index.js",
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
@@ -12,12 +11,13 @@
   "dependencies": {
     "async": "^1.5.2",
     "debug": "^2.2.0",
+    "fs-cson": "^0.3.2",
     "lodash": "^4.13.1",
     "meshblu": "^1.30.1",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^7.0.0",
-    "wemo-client": "^0.7.0",
-    "fs-cson": "^0.3.2"
+    "meshblu-connector-runner": "^8.0.0",
+    "meshblu-connector-schema-generator": "^2.0.0",
+    "wemo-client": "^0.7.0"
   },
   "platformDependencies": {
     "darwin": [],
@@ -40,12 +40,11 @@
   "author": "Octoblu, Inc. <sqrt@octoblu.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/octoblu/meshblu-wemo/issues"
+    "url": "https://github.com/octoblu/meshblu-connector-wemo/issues"
   },
-  "homepage": "https://github.com/octoblu/meshblu-wemo",
+  "homepage": "https://github.com/octoblu/meshblu-connector-wemo",
   "meshbluConnector": {
-    "githubSlug": "octoblu/meshblu-connector-wemo",
-    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-wemo/v2.0.1/schemas.json"
+    "githubSlug": "octoblu/meshblu-connector-wemo"
   },
   "devDependencies": {
     "chai": "^3.5.0",
