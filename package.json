@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-wemo",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "index.js",
   "scripts": {
     "start": "meshblu-connector-runner",
@@ -17,7 +17,7 @@
     "meshblu-config": "^4.0.0",
     "meshblu-connector-runner": "^8.0.0",
     "meshblu-connector-schema-generator": "^2.0.0",
-    "wemo-client": "^0.7.0"
+    "wemo-client": "^0.8.0"
   },
   "platformDependencies": {
     "darwin": [],
