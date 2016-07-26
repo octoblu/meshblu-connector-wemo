@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-wemo",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "main": "index.js",
   "scripts": {
     "start": "meshblu-connector-runner",
