@@ -12,9 +12,6 @@ properties:
       wemoName:
         title: "Wemo Name"
         type: "string"
-    required: [
-      "autoDiscover"
-    ]
 required: [
   "options"
 ]
