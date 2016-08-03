@@ -39,6 +39,7 @@ describe 'WemoManager', ->
     context 'when there is a client', ->
       beforeEach ->
         @sut.client =
+          deviceType: WemoClient.DEVICE_TYPE.Insight
           getInsightParams: sinon.stub().yields null, '1', '234275', {
             "ONSince": "1470236236"
             "OnFor": "2183"
@@ -62,6 +63,16 @@ describe 'WemoManager', ->
     context 'when there is no client', ->
       beforeEach ->
         @sut.client = null
+
+      it 'should yield an error', (done) ->
+        @sut.getInsightParams (error) =>
+          expect(error).to.exist
+          done()
+
+    context 'when the client is not an insight device', ->
+      beforeEach ->
+        @sut.client =
+          deviceType: WemoClient.DEVICE_TYPE.Switch
 
       it 'should yield an error', (done) ->
         @sut.getInsightParams (error) =>
