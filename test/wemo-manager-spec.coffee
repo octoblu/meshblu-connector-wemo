@@ -1,5 +1,9 @@
+{beforeEach, context, describe, it} = global
+{expect} = require 'chai'
+sinon = require 'sinon'
+
 UUID = require 'uuid'
-WemoClient = require 'wemo-client'
+WemoClient = require '@octoblu/wemo-client'
 WemoManager = require '../src/wemo-manager'
 {EventEmitter} = require 'events'
 
@@ -28,6 +32,39 @@ describe 'WemoManager', ->
 
       it 'should yield an error', (done) ->
         @sut.getBinaryState (error) =>
+          expect(error).to.exist
+          done()
+
+  describe '->getInsightParams', ->
+    context 'when there is a client', ->
+      beforeEach ->
+        @sut.client =
+          getInsightParams: sinon.stub().yields null, '1', '234275', {
+            "ONSince": "1470236236"
+            "OnFor": "2183"
+            "TodayONTime": "4284"
+            "TodayConsumed": "16437160"
+          }
+
+      it 'should yield binaryState, instantPower, and insightParams', (done) ->
+        @sut.getInsightParams (error, state, instantPower, insightParams) =>
+          return done error if error?
+          expect(state).to.equal 1
+          expect(instantPower).to.equal 234275
+          expect(insightParams).to.deep.equal {
+            ONSince: 1470236236
+            OnFor: 2183
+            TodayONTime: 4284
+            TodayConsumed: 16437160
+          }
+          done()
+
+    context 'when there is no client', ->
+      beforeEach ->
+        @sut.client = null
+
+      it 'should yield an error', (done) ->
+        @sut.getInsightParams (error) =>
           expect(error).to.exist
           done()
 

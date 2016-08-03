@@ -1,0 +1,32 @@
+title: 'GetSwitchState'
+type: 'object'
+properties:
+  data:
+    type: 'object'
+    properties:
+      binaryState:
+        type: 'integer'
+      instantPower:
+        type: 'integer'
+      insightParams:
+        type: 'object'
+        properties:
+          ONSince:
+            type: 'integer'
+          OnFor:
+            type: 'integer'
+          TodayONTime:
+            type: 'integer'
+          TodayConsumed:
+            type: 'integer'
+        required: [
+          'ONSince'
+          'OnFor'
+          'TodayONTime'
+          'TodayConsumed'
+        ]
+    required: [
+      'binaryState'
+      'instantPower'
+      'insightParams'
+    ]

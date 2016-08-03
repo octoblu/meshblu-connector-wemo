@@ -25,6 +25,9 @@ class Connector extends EventEmitter
   getBinaryState: (callback) =>
     @wemo.getBinaryState callback
 
+  getInsightParams: (callback) =>
+    @wemo.getInsightParams callback
+
   start: (device, callback) =>
     debug 'started'
     @onConfig device

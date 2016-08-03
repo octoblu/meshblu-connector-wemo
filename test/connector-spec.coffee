@@ -1,3 +1,7 @@
+{afterEach, beforeEach, describe, it} = global
+{expect} = require 'chai'
+sinon = require 'sinon'
+
 Connector = require '../'
 
 describe 'Connector', ->
@@ -29,6 +33,30 @@ describe 'Connector', ->
 
     it 'should return the binaryState', ->
       expect(@binaryState).to.equal 1
+
+  describe '->getInsightParams', ->
+    beforeEach (done) ->
+      @wemo.getInsightParams = sinon.stub().yields null, 1, 2, {
+        ONSince: 1470236236
+        OnFor: 2183
+        TodayONTime: 4284
+        TodayConsumed: 16437160
+      }
+      @sut.getInsightParams (error, @binaryState, @instantPower, @insightParams) =>
+        done error
+
+    it 'should call wemo.getInsightParams', ->
+      expect(@wemo.getInsightParams).to.have.been.called
+
+    it 'should return the binaryState, instantPower, and insightParams', ->
+      expect(@binaryState).to.equal 1
+      expect(@instantPower).to.equal 2
+      expect(@insightParams).to.deep.equal {
+        ONSince: 1470236236
+        OnFor: 2183
+        TodayONTime: 4284
+        TodayConsumed: 16437160
+      }
 
   describe '->turnOff', ->
     beforeEach (done) ->
