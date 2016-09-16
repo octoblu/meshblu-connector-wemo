@@ -22,9 +22,6 @@ matrix:
   exclude:
   - os: osx
     env: PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
-branches:
-  only:
-  - "/^v[0-9]/"
 before_install:
 - PACKAGER_URL="https://meshblu-connector.octoblu.com/tools/packager/latest"
 - curl -fsS "${PACKAGER_URL}/travis_install_node.sh" -o /tmp/travis_install_node.sh
@@ -61,3 +58,5 @@ deploy:
   on:
     tags: true
     condition: "$NPM_PUBLISH = true"
+after_success:
+- bash <(curl -s https://codecov.io/bash)
