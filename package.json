@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-wemo",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "main": "index.js",
   "scripts": {
     "start": "meshblu-connector-runner",
@@ -9,6 +9,7 @@
     "generate:schema": "meshblu-connector-schema-generator > schemas.json"
   },
   "dependencies": {
+    "@octoblu/wemo-client": "^0.9.0",
     "async": "^1.5.2",
     "debug": "^2.2.0",
     "fs-cson": "^0.3.2",
@@ -16,8 +17,7 @@
     "meshblu": "^1.30.1",
     "meshblu-config": "^4.0.0",
     "meshblu-connector-runner": "^8.0.0",
-    "meshblu-connector-schema-generator": "^2.0.0",
-    "@octoblu/wemo-client": "^0.9.0"
+    "meshblu-connector-schema-generator": "^2.0.0"
   },
   "platformDependencies": {
     "darwin": [],
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
     "istanbul": "^0.4.5",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4",
